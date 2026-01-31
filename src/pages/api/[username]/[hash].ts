@@ -32,7 +32,12 @@ export default async function handler(req: any, res: any) {
   }
 
   const farcaster = await fetch(
-    `https://client.farcaster.xyz/v2/user-thread-casts?castHashPrefix=${hash}&username=${username}&limit=5`
+    `https://farcaster.xyz/~api/v2/user-thread-casts?castHashPrefix=${hash}&username=${username}&limit=5`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.FARCASTER_API_TOKEN}`,
+      },
+    }
   );
   const cast = await farcaster.json();
 
